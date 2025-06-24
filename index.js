@@ -42,6 +42,18 @@ app.get('/api/:date', (req, res) => {
   });
 })
 
+app.get('/api/', (req, res) => {
+  
+
+  // Validate date
+  const date = new Date() ;
+
+  res.send({
+    unix: date.getTime(),
+    utc: date.toUTCString()
+  });
+})
+
 
 
 
