@@ -24,35 +24,44 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get('/api/:date', (req, res) => {
-  const input = req.params.date;
+// app.get('/api/:date', (req, res) => {
+//   const input = req.params.date;
 
-  // Check if the input is a number (timestamp in ms)
-  const isTimestamp = /^\d+$/.test(input);
-  const date = isTimestamp ? new Date(Number(input)) : new Date(input);
+//   // Check if the input is a number (timestamp in ms)
+//   const isTimestamp = /^\d+$/.test(input);
+//   const date = isTimestamp ? new Date(Number(input)) : new Date(input);
 
-  // Validate date
-  if (date.toString() === 'Invalid Date') {
-    return res.status(400).send({ error: 'Invalid Date' });
-  }
+//   // Validate date
+//   if (date.toString() === 'Invalid Date') {
+//     return res.status(400).send({ error: 'Invalid Date' });
+//   }
 
-  res.send({
-    unix: date.getTime(),
-    utc: date.toUTCString()
-  });
-})
+//   res.send({
+//     unix: date.getTime(),
+//     utc: date.toUTCString()
+//   });
+// })
 
-app.get('/api/', (req, res) => {
+// app.get('/api/', (req, res) => {
   
 
-  // Validate date
-  const date = new Date() ;
+//   // Validate date
+//   const date = new Date() ;
 
-  res.send({
-    unix: date.getTime(),
-    utc: date.toUTCString()
-  });
-})
+//   res.send({
+//     unix: date.getTime(),
+//     utc: date.toUTCString()
+//   });
+// })
+
+app.get('/api/whoami', (req, res) => {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  res.send(
+      {ipaddress:ip,language:"en-US,en;q=0.5",software:"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0"}
+  );
+});
+
+
 
 
 
